@@ -60,13 +60,13 @@ def Transpuesta(matriz):
         
 MatrizA = None 
 MatrizB = None
-listaOpciones=list(range(1,6))
+
 
 opcion=Imprimiropcion()
-while opcion not in listaOpciones:
+while opcion not in [1,2,3,4,5,6]:
     print("Ingrese una opcion correcta entre 1 y 6")
     opcion=Imprimiropcion()
-    while opcion in listaOpciones: 
+while opcion in [1,2,3,4,5,6]:
             match opcion: 
                 case 1: 
                     MatrizA = CrearMatriz("MatrizA")
