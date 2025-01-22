@@ -1,20 +1,35 @@
 print("----------------------------------------Calculadora de matrices-------------------------------------------") 
 
+def LeerNumero(mensaje):
+     while True:
+          try:
+               numero= int(input(mensaje+" "))
+               return numero
+          except ValueError:
+               print("Ingrese un numero valido. Intente nuevamenente")
+          except Exception as e:
+               print(f"Ha ocurrido un error al leer el numero {e}")
+
+
 def CrearMatriz(nombre=" "):
-    filas=int(input(f"Ingrese el numero de Filas de {nombre}: "))
-    columnas=int(input(f"Ingrese el numero de Columnas de {nombre}: "))
-    matriz=[[0 for _ in range(columnas)]for _ in range(filas)]
-    for i in range(len(matriz)):
-        for j in range(len(matriz[i])):
-            valor=int(input(f"Ingrese el valor de la fila {i+1} y columna {j+1} en la {nombre}: "))
-            matriz[i][j]=valor
+    try:
+        filas=LeerNumero(f"Ingrese el numero de Filas de {nombre}: ")
+        columnas=LeerNumero(f"Ingrese el numero de Columnas de {nombre}: ")
+        matriz=[[0 for _ in range(columnas)]for _ in range(filas)]
+        for i in range(len(matriz)):
+            for j in range(len(matriz[i])):
+                matriz[i][j]=LeerNumero(f"Ingrese el valor de la fila {i+1} y columna {j+1} en la {nombre}: ")
+    except IndexError:
+         print("Posicion no existe en el arreglo")
+    except Exception as e:
+         print(f"Ha ocurrido un error al crea la matriz {nombre}")
     print (f"{nombre} almacenada:")
     for i in range(len(matriz)):
         print(matriz[i])
     return matriz
 
 def Imprimiropcion():
-    opcionelegida = int(input("Escoge la opción que deseas realizar:\n(1) Ingresar Matriz A\n(2) Ingresar Matriz B\n(3) Sumar matrices\n(4) Multiplicar matrices\n(5) Matriz Transpuesta A\n(6) Matriz Transpuesta B\n")) 
+    opcionelegida = int(input("Escoge la opción que deseas realizar:\n(1) Ingresar Matriz A\n(2) Ingresar Matriz B\n(3) Sumar matrices\n(4) Multiplicar matrices\n(5) Matriz Transpuesta A\n(6) Matriz Transpuesta B\n(7) Salir\nOpcion:")) 
     return opcionelegida
 
 def ExistenciaMatrices():
@@ -63,10 +78,10 @@ MatrizB = None
 
 
 opcion=Imprimiropcion()
-while opcion not in [1,2,3,4,5,6]:
-    print("Ingrese una opcion correcta entre 1 y 6")
+while opcion not in [1,2,3,4,5,6,7]:
+    print("Ingrese una opcion correcta entre 1 y 7")
     opcion=Imprimiropcion()
-while opcion in [1,2,3,4,5,6]:
+while opcion in [1,2,3,4,5,6,7]:
             match opcion: 
                 case 1: 
                     MatrizA = CrearMatriz("MatrizA")
@@ -93,9 +108,11 @@ while opcion in [1,2,3,4,5,6]:
                       if ExistenciaMatrices():
                         print("-------------TRANSPUESTA DE B--------------")  
                         Transpuesta(MatrizB)
-
+                case 7:
+                      print("------------------------Gracias por utilizar la calculadora de Matrices------------------------")
+                      break  
                 case _: 
-                      print("!Error! La opción debe estar entre 1 y 6.")
+                      print("!Error! La opción debe estar entre 1 y 7.")
 
             opcion=Imprimiropcion()                   
 
